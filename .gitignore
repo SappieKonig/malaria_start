@@ -1,3 +1,10 @@
+*.csv
+*.pt
+data/
+yolo_dataset/
+data.zip
+runs/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

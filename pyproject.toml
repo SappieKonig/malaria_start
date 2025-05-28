@@ -1,0 +1,13 @@
+[project]
+name = "malaria-start"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "gdown>=5.2.0",
+    "pandas>=2.2.3",
+    "pillow>=11.2.1",
+    "scikit-learn>=1.6.1",
+    "ultralytics>=8.3.146",
+]
