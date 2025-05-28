@@ -74,7 +74,7 @@ def run_inference(
 
 if __name__ == '__main__':
     model_path = "yolo11n_malaria_fine_tuned.pt"
-    image_folder = "yolo_dataset/images/val"
+    image_folder = "data/test_images"
     output = "submission.csv"
 
     df = run_inference(model_path, image_folder, conf_threshold=0.01)
