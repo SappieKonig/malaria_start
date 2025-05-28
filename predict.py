@@ -77,7 +77,7 @@ if __name__ == '__main__':
     image_folder = "data/test_images"
     output = "submission.csv"
 
-    df = run_inference(model_path, image_folder, conf_threshold=0.01)
+    df = run_inference(model_path, image_folder)
 
     df.to_csv(output, index=False)
     print(f"Saved predictions to {output}")

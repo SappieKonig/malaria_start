@@ -48,5 +48,5 @@ and then submit the predictions using
 uv run submit.py
 ```
 Which will send the predictions to a server that I host, and will return the score.
-Before running submit.py, make sure to set the ngrok_id variable in submit.py to your ngrok ID. (ask me for it)
+Before running submit.py, make sure to set the NGROK_ID and TEAM_NAME environment variables in .env
 
