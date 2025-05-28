@@ -7,22 +7,22 @@ from PIL import Image
 import pandas as pd
 
 # Download
-# file_id = "1vpG9NBHI_9V5zJsY6Cpe1uys2HTnC2vh"
-# url = f"https://drive.google.com/uc?id={file_id}"
-# zip_file = "data.zip"
-# gdown.download(url, output=zip_file, quiet=False)
+file_id = "1vpG9NBHI_9V5zJsY6Cpe1uys2HTnC2vh"
+url = f"https://drive.google.com/uc?id={file_id}"
+zip_file = "data.zip"
+gdown.download(url, output=zip_file, quiet=False)
 
-# # Extract to temp dir
-# temp_dir = "temp_extract"
-# os.makedirs(temp_dir, exist_ok=True)
-# with zipfile.ZipFile(zip_file, 'r') as zip_ref:
-#     zip_ref.extractall(temp_dir)
+# Extract to temp dir
+temp_dir = "temp_extract"
+os.makedirs(temp_dir, exist_ok=True)
+with zipfile.ZipFile(zip_file, 'r') as zip_ref:
+    zip_ref.extractall(temp_dir)
 
-# # Move inner data/ to target data/
-# shutil.move(os.path.join(temp_dir, "data"), "data")
+# Move inner data/ to target data/
+shutil.move(os.path.join(temp_dir, "data"), "data")
 
-# # Cleanup
-# shutil.rmtree(temp_dir)
+# Cleanup
+shutil.rmtree(temp_dir)
 
 
 ######################################## CONVERT TO YOLO FORMAT ########################################
@@ -30,7 +30,6 @@ import pandas as pd
 CSV_PATH = "data/train.csv"
 IMAGE_DIR = "data/train_images"
 OUTPUT_DIR = "yolo_dataset"
-IMG_SIZE_FALLBACK = (2048, 2048)
 
 # Classes
 classes = ['Trophozoite', 'WBC', 'NEG']
@@ -63,11 +62,8 @@ for image_id, group in grouped:
     shutil.copyfile(src_img, dst_img)
 
     # Read image size
-    try:
-        with Image.open(src_img) as img:
-            width, height = img.size
-    except:
-        width, height = IMG_SIZE_FALLBACK
+    with Image.open(src_img) as img:
+        width, height = img.size
 
     # Create YOLO label file
     label_path = os.path.join(OUTPUT_DIR, 'labels', split, image_id.replace('.jpg', '.txt'))

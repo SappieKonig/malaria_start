@@ -70,3 +70,14 @@ def run_inference(
         columns=['Image_ID', 'class', 'confidence', 'ymin', 'xmin', 'ymax', 'xmax']
     )
     return df
+
+
+if __name__ == '__main__':
+    model_path = "yolo11n_malaria_fine_tuned.pt"
+    image_folder = "yolo_dataset/images/val"
+    output = "submission.csv"
+
+    df = run_inference(model_path, image_folder, conf_threshold=0.01)
+
+    df.to_csv(output, index=False)
+    print(f"Saved predictions to {output}")
