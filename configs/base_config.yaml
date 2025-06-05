@@ -1,0 +1,11 @@
+training:
+  learning_rate: 0.001
+  batch_size: 16
+  num_epochs: 10
+  imgsz: 640
+
+# hydra does this annoying thing where it changes the cwd to the run directory. This is needed to disable that behavior.
+hydra:
+  job:
+    chdir: False
+    
