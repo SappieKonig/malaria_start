@@ -101,3 +101,24 @@ This will run the training script with different configurations, and track the r
 This will go horribly wrong. Because we said to optimize `val_accuracy`, but we never log `val_accuracy`. In the competition, we're optimizing mAP50. So we should probably log that.
 
 Now, the most important thing. Clicking the sweep link (it was posted just after we ran `uv run sweep configs/sweep_config.yaml`) will open the sweep page in wandb, and now we sit back and wait.
+
+## Ensembling with TTA
+
+Once you have trained a few models you can combine their strengths by averaging
+their predictions. This is called *ensembling* and usually leads to a small but
+reliable performance boost because different models make different mistakes.
+
+Another easy trick is *test time augmentation* (TTA). The idea is simple: run a
+model on slightly modified versions of the same image and merge the results. In
+this repository we only use flips, because they are fast and deterministic. An
+image is predicted four times: as is, horizontally flipped, vertically flipped
+and flipped both ways. The boxes are un-flipped back to the original coordinate
+frame and written to a single CSV file.
+
+Run the script with
+```bash
+uv run tta_ensemble.py
+```
+and edit the `models` list inside `tta_ensemble.py` to point at the model files
+you want to ensemble. By default the combined detections are stored in
+`tta_submission.csv`.
